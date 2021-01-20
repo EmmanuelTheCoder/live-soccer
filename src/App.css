@@ -1,0 +1,40 @@
+.app{
+  /* background-image: url('pictures/football-bg.gif');
+  background-repeat: no-repeat;
+  background-size: cover; */
+
+}
+.app-name{
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 2.1rem;
+}
+.app-name sub{
+  color: red;
+  animation: move 4s ease infinite;
+  transition: 4s ease all;
+}
+@keyframes move{
+  0%{
+    
+  }
+  100%{
+    
+  }
+}
+.date-btn{
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+  
+
+}
+.date-btn button{
+  font-size: 1.1rem;
+}
+.blackButton{
+  background: red;
+}
+.blueButton{
+  background: none;
+}
