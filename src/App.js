@@ -2,8 +2,9 @@ import {useEffect} from 'react';
 import './App.css';
 import footballbg from './pictures/football-bg.gif';
 import RandomFixtures from './components/randomfixtures';
-import {useDispatch} from 'react-redux';
-import {todaybtn} from './actions'
+import {useDispatch, useSelector} from 'react-redux';
+import { TODAY_fIXTURES, TOMORROW_FIXTURES, NEXT_TOMORROW_FIXTURES } from './actions/type';
+import {todayFixtures, tomorrowFixtures, nextTomorrowFixtures} from './actions/index'
 
 //today's date
 const today = new Date();
@@ -34,8 +35,22 @@ function App() {
   
   useEffect(()=>{
   },[]);
-  
   const dispatch = useDispatch();
+
+  // const selectorParam = useSelector(state => state.fetchResult)
+  // const handleClick = () =>{
+  //    dispatch(todaybtn)
+  //     console.log("app call", selectorParam);
+  // }
+  const handleTodayFixtures = () =>{
+    dispatch(todayFixtures(TODAY_fIXTURES));
+}
+  const handleTomorowFixtures = () =>{
+      dispatch(tomorrowFixtures(TOMORROW_FIXTURES));
+  }
+  const handleNextTomorrowFixtures = () =>{
+      dispatch(nextTomorrowFixtures(NEXT_TOMORROW_FIXTURES));
+  }
   
   
   return (
@@ -43,9 +58,9 @@ function App() {
      <h1 className="app-name">L<sub>i</sub>ve S<img src="https://img.icons8.com/emoji/28/000000/soccer-ball-emoji.png" alt="soccer"/><span>cc</span>er</h1>
       <div className="date-btn">
         <button>Random dates</button>
-        <button onClick={()=>dispatch(todaybtn)}>{todayDate}</button>
+        <button >{todayDate}</button>
         <button>{tomorrowDate}</button>
-        <button>{nextTomorrowDate}</button>
+        <button >{nextTomorrowDate}</button>
       </div>
       <RandomFixtures />
    </div>
