@@ -3,6 +3,8 @@
   background-repeat: no-repeat;
   background-size: cover; */
   background: purple;
+  margin: -1rem;
+  padding: 0;
 }
 .app-name{
   text-align: center;
@@ -10,18 +12,11 @@
   font-size: 2.1rem;
   color: rgb(228, 222, 222);
 }
+
 .app-name sub{
   color: red;
   animation: move 4s ease infinite;
   transition: 4s ease all;
-}
-@keyframes move{
-  0%{
-    
-  }
-  100%{
-    
-  }
 }
 .date-btn{
   margin-top: 2rem;

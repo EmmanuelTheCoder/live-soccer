@@ -59,6 +59,8 @@ function App() {
   
   return (
    <div className="app">
+   
+
      <h1 className="app-name">L<sub>i</sub>ve S<img src="https://img.icons8.com/emoji/28/000000/soccer-ball-emoji.png" alt="soccer"/><span>cc</span>er</h1>
       <div className="date-btn">
         <button onClick={handleRandomLeague} style={{background: randomButtonColor === "randomBtnColor" ? "rgba(222,45,56,.4)" : "silver", color: randomButtonColor === "randomBtnColor" ? "white" : "black"}}>Random</button>
