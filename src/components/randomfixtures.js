@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {useSelector, useDispatch} from 'react-redux';
 import {randomFixtures} from '../actions/index';
@@ -8,24 +8,23 @@ import {RANDOM_FIXTURES} from '../actions/type'
 
 
 const RandomFixtures = () => {
-        const dispatch = useDispatch()
-        // const checkCountFrom = useSelector(state => state.from);
-        const checkLoading = useSelector(state => state.isLoading);
-        const checkApiResult = useSelector(state => state.fetchResult)
+        const dispatch = useDispatch();
+        const getApiResult = useSelector(state => state.fetchResult)
         
         const [apiData, setApiData] = useState([]);
 
-        const loadingRef =  useRef(checkLoading)
         
     useEffect(()=>{
 
         dispatch(randomFixtures(RANDOM_FIXTURES ));
-        setApiData(checkApiResult);
-        console.log("api data", apiData)
-        loadingRef.current = false
 
-    },[])
-    //const apiKey = '238b9cd32486ce154b1830a00a1b4d237e267d47f2fd833732a75070e1a76212';
+    },[dispatch])
+
+    useEffect(()=>{
+        setApiData(getApiResult)
+    }, [getApiResult])
+
+  
     const testClick = () =>{
         // fetch(`https://allsportsapi.com/api/football/?met=Fixtures&APIkey=${apiKey}&from=2021-01-15&to=2021-01-29`)
         // .then(res => res.json())
@@ -35,16 +34,17 @@ const RandomFixtures = () => {
     
     return(
         <div>
-            <h2>{checkLoading ? "Loading football fixtures" : ""}</h2>
-            <button onClick={testClick}>get api information</button>
             
-    {(typeof apiData.result != 'undefined') ? (
-        apiData.result.map(res=>{
+    {(typeof apiData != 'undefined') ? (
+        apiData.map(res=>{
             
             return(
                 <FixturesDisplay key={res.event_key} className="display-matches">
-                  <p>{res.country_name}</p>
+                  {/* <p>{res.country_name}</p> */}
+                  <hr/>
+                  <hr/>
                   <div className="versus">
+                      
                       <div>
                           <img src={res.away_team_logo} alt="away logo"/>
                           <h3>{res.event_away_team}</h3>
@@ -83,11 +83,12 @@ export default RandomFixtures;
 
 
 const FixturesDisplay = styled.div`
-    background: red;
+    background: purple;
     
     .versus{
         display: flex;
         justify-content: space-evenly;
+        margin-top: 3rem;
         img{
             width: 30px;
         }
@@ -99,10 +100,16 @@ const FixturesDisplay = styled.div`
         text-align: center;
         font-size: 1.2rem;
         font-weight: bold;
-        box-shadow: silver 5px 7px 9px 6px;
+        box-shadow: silver 4px 3px 4px 2px;
         width: max-content;
         padding: 1rem 1rem;
         margin: auto;
+        background: #fff;
+        border-top-left-radius: 40px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        margin-bottom: 2rem;
+
     }
     hr{
         margin: 0 -1rem;

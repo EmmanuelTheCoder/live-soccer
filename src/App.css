@@ -2,12 +2,13 @@
   /* background-image: url('pictures/football-bg.gif');
   background-repeat: no-repeat;
   background-size: cover; */
-
+  background: purple;
 }
 .app-name{
   text-align: center;
   margin-top: 1rem;
   font-size: 2.1rem;
+  color: rgb(228, 222, 222);
 }
 .app-name sub{
   color: red;
@@ -31,10 +32,13 @@
 }
 .date-btn button{
   font-size: 1.1rem;
+  outline: none;
+  background: silver;
+  padding: .4rem .5rem;
+  border-radius: 40px 10px;
+  margin-bottom: 3rem;
+  font-weight: bold;
 }
-.blackButton{
-  background: red;
-}
-.blueButton{
-  background: none;
+.date-btn button:hover{
+  background:  rgb(182, 164, 164);
 }

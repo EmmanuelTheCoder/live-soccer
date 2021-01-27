@@ -1,58 +1,53 @@
-// export const todaybtn = () =>{
-//     return{
-//         type: 'TODAY'
-//     }
-// }
-import {RANDOM_FIXTURES, TODAY_fIXTURES, TOMORROW_FIXTURES, NEXT_TOMORROW_FIXTURES } from './type'
+
+import {RANDOM_FIXTURES, SCOTISH_LEAGUE, FRENCH_LEAGUE } from './type'
 import {parameters} from '../reducers/changebtn';
 
 
-const apiKey = '238b9cd32486ce154b1830a00a1b4d237e267d47f2fd833732a75070e1a76212';
+const API_KEY = process.env.REACT_APP_API_KEY
 export const randomFixtures = () => dispatch =>{
-    //const fixtures = `https://allsportsapi.com/api/football/?met=Fixtures&APIkey=${apiKey}&from=${parameters.from}&to=${parameters.to}`;
     
-    return fetch(`https://allsportsapi.com/api/football/?met=Fixtures&APIkey=${apiKey}&from=${parameters.from}&to=${parameters.to}`)
+    return fetch(`https://allsportsapi.com/api/football/?met=Fixtures&APIkey=${API_KEY}&from=${parameters.from}&to=${parameters.to}`)
     .then(response => response.json())
-    .then(data => dispatch({
+    .then(data => {
+        const randomMatches = data.result.sort(()=> Math.random() - 0.5)
+        return dispatch({
         type: RANDOM_FIXTURES,
-        payload: data,
-    }))
+        payload: randomMatches,
+        buttonColor: "randomBtnColor"
+    })})
     
 
 }
-export const todayFixtures = () => dispatch =>{
+export const scotishLeague = () => dispatch =>{
+    
+    return fetch(`https://allsportsapi.com/api/football/?met=Fixtures&APIkey=${API_KEY}&from=${parameters.from}&to=${parameters.to}`)
+    .then(response => response.json())
+    .then(data => {
+        const getSelectedMatches = data.result.filter(res => res.country_name === "Scotland");
+        const randomMatches = getSelectedMatches.sort(()=> Math.random() - 0.5);
+
+        return dispatch({
+        type: SCOTISH_LEAGUE,
+        payload: randomMatches,
+        buttonColor: "scotishBtnColor"
+    })})
+    
+
+}
+export const frenchLeague = () => dispatch =>{
     //const fixtures = `https://allsportsapi.com/api/football/?met=Fixtures&APIkey=${apiKey}&from=${parameters.from}&to=${parameters.to}`;
     
-    return fetch(`https://allsportsapi.com/api/football/?met=Fixtures&APIkey=${apiKey}&from=${parameters.from}&to=${parameters.to}`)
+    return fetch(`https://allsportsapi.com/api/football/?met=Fixtures&APIkey=${API_KEY}&from=${parameters.from}&to=${parameters.to}`)
     .then(response => response.json())
-    .then(data => dispatch({
-        type: TODAY_fIXTURES,
-        payload: data,
-    }))
+    .then(data => {
+        const getSelectedMatches = data.result.filter(res => res.country_name === "France");
+        const randomMatches = getSelectedMatches.sort(()=> Math.random() - 0.5);
+        dispatch({
+        type: FRENCH_LEAGUE,
+        payload: randomMatches,
+        buttonColor: "frenchBtnColor"
+    })})
     
 
 }
-export const tomorrowFixtures = () => dispatch =>{
-    //const fixtures = `https://allsportsapi.com/api/football/?met=Fixtures&APIkey=${apiKey}&from=${parameters.from}&to=${parameters.to}`;
-    
-    return fetch(`https://allsportsapi.com/api/football/?met=Fixtures&APIkey=${apiKey}&from=${parameters.from}&to=${parameters.to}`)
-    .then(response => response.json())
-    .then(data => dispatch({
-        type: TOMORROW_FIXTURES,
-        payload: data,
-    }))
-    
 
-}
-export const nextTomorrowFixtures = () => dispatch =>{
-    //const fixtures = `https://allsportsapi.com/api/football/?met=Fixtures&APIkey=${apiKey}&from=${parameters.from}&to=${parameters.to}`;
-    
-    return fetch(`https://allsportsapi.com/api/football/?met=Fixtures&APIkey=${apiKey}&from=${parameters.from}&to=${parameters.to}`)
-    .then(response => response.json())
-    .then(data => dispatch({
-        type: NEXT_TOMORROW_FIXTURES,
-        payload: data,
-    }))
-    
-
-}

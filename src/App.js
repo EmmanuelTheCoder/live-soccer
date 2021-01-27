@@ -1,10 +1,9 @@
-import {useEffect} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import './App.css';
-import footballbg from './pictures/football-bg.gif';
 import RandomFixtures from './components/randomfixtures';
 import {useDispatch, useSelector} from 'react-redux';
-import { TODAY_fIXTURES, TOMORROW_FIXTURES, NEXT_TOMORROW_FIXTURES } from './actions/type';
-import {todayFixtures, tomorrowFixtures, nextTomorrowFixtures} from './actions/index'
+import {RANDOM_FIXTURES, SCOTISH_LEAGUE, FRENCH_LEAGUE } from './actions/type';
+import {randomFixtures, scotishLeague, frenchLeague} from './actions/index'
 
 //today's date
 const today = new Date();
@@ -37,31 +36,38 @@ function App() {
   },[]);
   const dispatch = useDispatch();
 
-  // const selectorParam = useSelector(state => state.fetchResult)
-  // const handleClick = () =>{
-  //    dispatch(todaybtn)
-  //     console.log("app call", selectorParam);
-  // }
-  const handleTodayFixtures = () =>{
-    dispatch(todayFixtures(TODAY_fIXTURES));
-}
-  const handleTomorowFixtures = () =>{
-      dispatch(tomorrowFixtures(TOMORROW_FIXTURES));
-  }
-  const handleNextTomorrowFixtures = () =>{
-      dispatch(nextTomorrowFixtures(NEXT_TOMORROW_FIXTURES));
-  }
+  const [getCountryLeague, setGetCountryLeague] = useState("Random Fixtures")
+
+  const randomButtonColor = useSelector(state => state.btnColor)
+
+  const handleFrenchLeague = useCallback(()=>{
+      dispatch(frenchLeague(FRENCH_LEAGUE));
+      setGetCountryLeague("French league 2");
+  },[ dispatch])
+
+  const handleScotishLeague = useCallback(()=>{
+    dispatch(scotishLeague(SCOTISH_LEAGUE));
+    setGetCountryLeague("Scotish Premiership");
+  }, [dispatch])
+
+  const handleRandomLeague = useCallback(()=>{
+    dispatch(randomFixtures(RANDOM_FIXTURES));
+    setGetCountryLeague("Random Fixtures")
+  },[dispatch])
+ 
   
   
   return (
    <div className="app">
      <h1 className="app-name">L<sub>i</sub>ve S<img src="https://img.icons8.com/emoji/28/000000/soccer-ball-emoji.png" alt="soccer"/><span>cc</span>er</h1>
       <div className="date-btn">
-        <button>Random dates</button>
-        <button >{todayDate}</button>
-        <button>{tomorrowDate}</button>
-        <button >{nextTomorrowDate}</button>
+        <button onClick={handleRandomLeague} style={{background: randomButtonColor === "randomBtnColor" ? "rgba(222,45,56,.4)" : "silver", color: randomButtonColor === "randomBtnColor" ? "white" : "black"}}>Random</button>
+        <button onClick={handleFrenchLeague} style={{background: randomButtonColor === "frenchBtnColor" ? "rgba(222,45,56,.4)" : "silver", color: randomButtonColor === "frenchBtnColor" ? "white" : "black"}}>French League2</button>
+        <button onClick={handleScotishLeague} style={{background: randomButtonColor === "scotishBtnColor" ? "rgba(222,45,56,.4)" : "silver", color: randomButtonColor === "scotishBtnColor" ? "white" : "black"}}> Scotish Premiership</button>
+        
       </div>
+
+      <h1 style={{textAlign: 'center', color: 'rgba(228, 220, 222,.7)'}}>{getCountryLeague}</h1>
       <RandomFixtures />
    </div>
    
