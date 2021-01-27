@@ -26,21 +26,25 @@ const RandomFixtures = () => {
 
   
     const testClick = () =>{
-        // fetch(`https://allsportsapi.com/api/football/?met=Fixtures&APIkey=${apiKey}&from=2021-01-15&to=2021-01-29`)
-        // .then(res => res.json())
-        // .then(data => console.log(data))
+        const apiKey = process.env.REACT_APP_API_KEY;
+        fetch(`https://allsportsapi.com/api/football/?&met=Topscorers&leagueId=258&APIkey=${apiKey}`)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            const sliceResult = data.result.slice(0, 50);
+            console.log("sliced result", sliceResult)
+        })
     }
    
     
     return(
         <div>
-            
+        <button onClick={testClick}>test button</button>
     {(typeof apiData != 'undefined') ? (
         apiData.map(res=>{
             
             return(
                 <FixturesDisplay key={res.event_key} className="display-matches">
-                  {/* <p>{res.country_name}</p> */}
                   <hr/>
                   <hr/>
                   <div className="versus">
