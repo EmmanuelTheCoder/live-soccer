@@ -3,7 +3,7 @@
   background-repeat: no-repeat;
   background-size: cover; */
   background: purple;
-  margin: -1rem;
+  margin-top: -1rem;
   padding: 0;
 }
 .app-name{
@@ -11,6 +11,7 @@
   margin-top: 1rem;
   font-size: 2.1rem;
   color: rgb(228, 222, 222);
+  
 }
 
 .app-name sub{
@@ -26,14 +27,25 @@
 
 }
 .date-btn button{
-  font-size: 1.1rem;
+  font-size: 1rem;
   outline: none;
   background: silver;
-  padding: .4rem .5rem;
+  padding: .2rem .3rem;
   border-radius: 40px 10px;
   margin-bottom: 3rem;
   font-weight: bold;
 }
 .date-btn button:hover{
   background:  rgb(182, 164, 164);
+}
+.topscore-div{
+  
+  background: black;
+  width: 40%;
+  margin: auto;
+  position: absolute;
+  top: 4rem;
+  right: 0;
+  left: 0;
+  color: white;
 }

@@ -1,48 +1,46 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom'
+import Navbar from './navbar'
 import {useSelector, useDispatch} from 'react-redux';
 import {randomFixtures} from '../actions/index';
 import {RANDOM_FIXTURES} from '../actions/type'
 
 
-
-
 const RandomFixtures = () => {
+
         const dispatch = useDispatch();
+        //get the fixtures api result from the redux store
         const getApiResult = useSelector(state => state.fetchResult)
         
+        //get the scorersIndex api result form the redux store;
+       
+
         const [apiData, setApiData] = useState([]);
+        
 
         
     useEffect(()=>{
 
         dispatch(randomFixtures(RANDOM_FIXTURES ));
-
+      
     },[dispatch])
 
     useEffect(()=>{
         setApiData(getApiResult)
     }, [getApiResult])
-
   
-    const testClick = () =>{
-        const apiKey = process.env.REACT_APP_API_KEY;
-        fetch(`https://allsportsapi.com/api/football/?&met=Topscorers&leagueId=258&APIkey=${apiKey}`)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            const sliceResult = data.result.slice(0, 50);
-            console.log("sliced result", sliceResult)
-        })
-    }
-   
-    
+    //goals:  //player_name: //player_place // team_name // team_key //player_key
     return(
         <div>
-        <button onClick={testClick}>test button</button>
+            <Navbar />
+        <div style={{textAlign: 'right'}}>
+            <Link to="/topscorers">
+                <button style={{fontSize: '1.1rem'}}>see top scorers</button>
+            </Link>
+        </div>
     {(typeof apiData != 'undefined') ? (
         apiData.map(res=>{
-            
             return(
                 <FixturesDisplay key={res.event_key} className="display-matches">
                   <hr/>
@@ -67,7 +65,7 @@ const RandomFixtures = () => {
                            <hr />
                           <p>Match date: {res.event_date}</p>
                            <hr />
-                          <p>Time: {res.event_time}</p>
+                          <p>Time: {res.event_time} (GMT+1)</p>
                            <hr />
                           <p>Home team: {res.event_home_team} </p>
                            <hr />

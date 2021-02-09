@@ -7,9 +7,8 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import { Provider} from 'react-redux';
 import changeBtn from './reducers/changebtn';
+import {BrowserRouter as Router} from 'react-router-dom'
 
-
-//dfdfdfd
 
 
 const middleware = [thunk];
@@ -22,24 +21,14 @@ export const store = createStore(
   //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
   
-  // this is the copied line of
-
-//   import { createStore, compose, applyMiddleware } from 'redux';
-// import thunk from 'redux-thunk';
-// import reducers from '../reducers';
-
-// const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-// const store = createStore(
-//   reducers,
-//   composeEnhancer(applyMiddleware(thunk)),
-// );
 
 export default store;
 ReactDOM.render(
   <React.StrictMode>
       <Provider store={store}>
-        <App />
+        <Router>
+          <App />
+        </Router>
     </Provider>
     </React.StrictMode>,
   document.getElementById('root')

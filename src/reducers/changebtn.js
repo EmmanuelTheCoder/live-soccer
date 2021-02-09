@@ -1,13 +1,13 @@
 //import {parameters} from '../components/randomfixtures';
-import { todayDate,  fifteenDate} from '../App';
-import {RANDOM_FIXTURES, SCOTISH_LEAGUE, FRENCH_LEAGUE} from '../actions/type'
+import { todayDate,  fifteenDate} from '../components/navbar';
+import {RANDOM_FIXTURES, SCOTISH_LEAGUE, FRENCH_LEAGUE, TOP_SCORERS} from '../actions/type'
 
 export const parameters = {
     from: '2021-01-22',
     to: '2021-02-02',
     fetchResult: [],
-    isloading: false,
-    btnColor: ""
+    btnColor: "",
+    
 }
 
 
@@ -20,7 +20,6 @@ const changeBtn = (state = parameters, action) => {
                 from: todayDate,
                 to: fifteenDate,
                 fetchResult: action.payload,
-                isLoading: true,
                 btnColor: action.buttonColor
             }
             case SCOTISH_LEAGUE:
@@ -39,6 +38,11 @@ const changeBtn = (state = parameters, action) => {
                         fetchResult: action.payload,
                         btnColor: action.buttonColor
             }
+            case TOP_SCORERS:
+                return {
+                    ...state,
+                    fetchResult: action.payload
+                }
         
 
         default: 

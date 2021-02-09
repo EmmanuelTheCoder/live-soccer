@@ -5,6 +5,7 @@
 ![Project screenshot](screenshot/livescore3.png)
 
 
+### I can only that the free API is still free by the time you are here. If it's not, the screenshot above should help you a little on what it looked like.
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
