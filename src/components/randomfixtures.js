@@ -77,6 +77,12 @@ const RandomFixtures = () => {
             )
           })   
           ) : (<p>data is still undefined</p>)}
+
+            <div style={{textAlign: 'center', paddingBottom: '1.5rem' }}>
+                <Link to="/topscorers">
+                    <button style={{width: '6rem', fontSize: '1rem', fontWeight: 'bolder', background: 'silver', textTransform: 'capitalize'}}>See top scorers</button>
+                </Link>
+            </div>
         </div>
     )
 }
