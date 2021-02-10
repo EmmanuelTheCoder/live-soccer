@@ -17,7 +17,7 @@ const TopScorers = () =>{
 
     useEffect(()=>{
         setScorerIndex(getScorerIndexFromStore)
-        console.log(getScorerIndexFromStore);
+        
     },[getScorerIndexFromStore])
 
     //goals:  //player_name: //player_place // team_name // team_key //player_key

@@ -12,7 +12,7 @@ export const parameters = {
 
 
 const changeBtn = (state = parameters, action) => {
-    console.log("this is the reducer")
+    
     switch(action.type){
         case RANDOM_FIXTURES:
             return {

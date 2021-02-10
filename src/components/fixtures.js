@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Suspense, lazy} from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom'
-import Navbar from './navbar'
 import {useSelector, useDispatch} from 'react-redux';
 import {randomFixtures} from '../actions/index';
 import {RANDOM_FIXTURES} from '../actions/type'
 
+const Navbar = lazy(() => import('./navbar'));
 
 const RandomFixtures = () => {
 
@@ -33,7 +33,10 @@ const RandomFixtures = () => {
     //goals:  //player_name: //player_place // team_name // team_key //player_key
     return(
         <div>
-            <Navbar />
+            <Suspense fallback={<h2 style={{textAlign: 'center', color: 'silver'}}>loading...</h2>}>
+
+                <Navbar />
+            </Suspense>
         <div style={{textAlign: 'right'}}>
             <Link to="/topscorers">
                 <button style={{fontSize: '1.1rem'}}>see top scorers</button>
